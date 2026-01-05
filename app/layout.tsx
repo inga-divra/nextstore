@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google';
 import '@/assets/styles/globals.css';
 const inter = Inter({ subsets: ['latin'] });
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from '@/lib/constants';
+import { ThemeProvider } from 'next-themes';
+
 export const metadata: Metadata = {
   title: {
     template: `%s | Nextstore`,
@@ -18,8 +20,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+    <html lang='en' suppressHydrationWarning>
+      <body className={`${inter.className} antialiased`}>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='light'
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
