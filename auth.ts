@@ -3,6 +3,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import { prisma } from '@/db/prisma'
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compareSync } from 'bcrypt-ts-edge';
+import type { NextAuthConfig } from 'next-auth';
 
 export const config = {
     pages: {
@@ -52,6 +53,19 @@ export const config = {
             },
         }),
     ],
-}
+    callbacks: {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        async session({ session, user, trigger, token }: any) {
+            //Set the user ID from the token
+            session.user.id = token.sub
+
+            //If there is an update, set the user name
+            if (trigger === 'update') {
+                session.user.name = user.name;
+            }
+            return session
+        },
+    }
+} satisfies NextAuthConfig
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config)
