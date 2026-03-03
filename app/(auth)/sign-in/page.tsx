@@ -17,6 +17,8 @@ export const metadata: Metadata = {
   title: 'Sign In',
 };
 
+import CredentialsSignInForm from './credentials-signin-form';
+
 const SignIn = async () => {
   const session = await auth();
   if (session) redirect('/');
@@ -41,7 +43,9 @@ const SignIn = async () => {
           </CardDescription>
         </CardHeader>
 
-        <CardContent className='space-y-4'>{/* FORM HERE */}</CardContent>
+        <CardContent className='space-y-4'>
+          <CredentialsSignInForm />
+        </CardContent>
       </Card>
     </div>
   );
