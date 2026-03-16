@@ -19,9 +19,17 @@ export const metadata: Metadata = {
 
 import CredentialsSignInForm from './credentials-signin-form';
 
-const SignIn = async () => {
+const SignIn = async (props: {
+  searchParams: Promise<{
+    callbackUrl: string;
+  }>;
+}) => {
+  const { callbackUrl } = await props.searchParams;
+
   const session = await auth();
-  if (session) redirect('/');
+  if (session) {
+    return redirect(callbackUrl || '/');
+  }
 
   return (
     <div className='w-full max-w-md mx-auto'>
