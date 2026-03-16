@@ -13,6 +13,15 @@ const CredentialsSignInForm = () => {
     success: false,
     message: '',
   });
+
+  const SignInButton = () => {
+    const { pending } = useFormStatus();
+    return (
+      <Button disabled={pending} className='w-full' variant='default'>
+        {pending ? 'Signing In...' : 'Sign In with credentials'}
+      </Button>
+    );
+  };
   return (
     <form action={action}>
       <div className='space-y-6'>
@@ -39,9 +48,7 @@ const CredentialsSignInForm = () => {
           />
         </div>
         <div>
-          <Button className='w-full' variant='default'>
-            Sign In with credentials
-          </Button>
+          <SignInButton />
         </div>
 
         {data && !data.success && (
