@@ -25,6 +25,6 @@ export const signInWithCredentials = async (prevState: unknown, formData: FormDa
 
 //Sign user out
 
-export const sifnPutUser = async () => {
+export const signOutUser = async () => {
     await signOut()
 }
