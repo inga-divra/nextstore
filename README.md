@@ -1,23 +1,46 @@
-# Prostore — Full-Stack E-commerce (Educational Project)
+# 🛍️ Prostore — Full-Stack E-commerce Application
 
-## 📌 Project Overview
+## 🌐 Live Demo
 
-**Prostore** is a full-stack educational e-commerce project created to deepen my practical understanding of modern web development using **Next.js** and **React**.
+👉 https://nextstore-chi.vercel.app/
 
-The primary goal of this project is not only to build a functional online store, but also to **practice real-world full-stack architecture**, understand how different technologies work together, and develop production-ready skills suitable for a professional portfolio and academic evaluation.
-
-The project is developed step by step with a strong emphasis on **understanding concepts rather than copying solutions**.
+**Test account:**  
+Email: admin@example.com  
+Password: 123456
 
 ---
 
-## 🎯 Project Goals
+## 📌 Project Overview
 
-- Build a real-world full-stack web application from scratch
-- Strengthen practical skills in **React, Next.js, and TypeScript**
-- Learn to design scalable and maintainable frontend and backend architectures
-- Practice clean code, reusable components, and modern UI patterns
-- Gain hands-on experience with authentication, databases, payments, and deployment
-- Create a solid project suitable for **university coursework and job applications**
+**Prostore** is a full-stack e-commerce application built to gain hands-on experience with modern web development using **Next.js, React, and TypeScript**.
+
+This project focuses on building a **production-style application**, understanding full-stack architecture, and applying best practices in real-world scenarios.
+
+The application includes user authentication, product management, shopping cart functionality, and admin features.
+
+---
+
+## 🎯 Goals
+
+- Build a real-world full-stack web application
+- Practice scalable frontend and backend architecture
+- Learn authentication, database design, and API integration
+- Develop production-ready skills for job applications
+- Complete a university full-stack project (Harjoitustyö)
+
+---
+
+## ✨ Features
+
+- 🔐 User authentication (NextAuth, credentials)
+- 🛍️ Product listing and details
+- 🛒 Shopping cart system
+- 📦 Order creation and checkout
+- 🧑‍💼 Admin dashboard (CRUD operations)
+- 🖼️ Image uploads
+- 💳 Payment integration (Stripe / PayPal)
+- 📧 Email notifications
+- 📱 Responsive UI (mobile + desktop)
 
 ---
 
@@ -25,57 +48,42 @@ The project is developed step by step with a strong emphasis on **understanding 
 
 ### Frontend
 
-- **Next.js 15**
-- **React 19**
-- **TypeScript**
-- **Tailwind CSS**
-- **shadcn/ui**
-- **Lucide Icons**
-- **Recharts**
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
 
 ### Backend & Data
 
-- **PostgreSQL**
-- **Prisma ORM**
-- **Zod** (schema validation)
-- **NextAuth** (authentication)
+- PostgreSQL
+- Prisma ORM
+- NextAuth (authentication)
+- Zod (validation)
 
-### Payments & Services
+### Services
 
-- **PayPal API**
-- **Stripe API**
-- **Uploadthing** (image uploads)
-- **Resend** (email receipts)
+- Stripe / PayPal
+- Uploadthing
+- Resend
 
-### Tooling & Quality
+### Tooling
 
-- **ESLint**
-- **Jest**
-- **Git & GitHub**
-- **Vercel** (deployment)
-
----
-
-## 🚀 What I Learned & Practiced
-
-- Building a **production-style e-commerce platform**
-- Creating reusable UI components and scalable layouts
-- Working with **server and client components** in Next.js
-- Managing authentication, sessions, cookies, and JWT
-- Designing database schemas and handling migrations with Prisma
-- Implementing full **CRUD functionality** for products, users, and orders
-- Integrating third-party APIs (payments, email services, file uploads)
-- Developing an **admin dashboard** with analytics and management features
-- Writing type-safe code using TypeScript and Zod
-- Debugging SSR/CSR issues, hydration errors, and environment configurations
-- Deploying and maintaining a full-stack application in a production environment
+- ESLint
+- Jest
+- Git & GitHub
+- Vercel
 
 ---
 
-## 📚 Project Structure Highlights
+## 📸 Screenshots
 
-- Modular and scalable component architecture
-- Route groups and multiple layouts in Next.js
-- Separate admin and user areas
-- Responsive UI for desktop and mobile devices
-- Proper error handling, loading states, and custom 404 pages
+---
+
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/your-username/prostore.git
+cd prostore
+npm install
+```
