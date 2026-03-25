@@ -31,13 +31,13 @@ export const signOutUser = async () => {
 }
 
 // Register a new user
-export async function signUp(prevState: unknown, formData: FormData) {
+export async function signUpUser(prevState: unknown, formData: FormData) {
     try {
         const user = signUpFormSchema.parse({
             name: formData.get('name'),
             email: formData.get('email'),
-            confirmPassword: formData.get('confirmPassword'),
             password: formData.get('password'),
+            confirmPassword: formData.get('confirmPassword'),
         });
 
         const plainPassword = user.password;
