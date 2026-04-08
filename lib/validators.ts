@@ -56,3 +56,13 @@ export const cartItemSchema = z.object({
             'Price must have exactly two decimal places (e.g., 49.99)'
         ),
 });
+
+export const insertCartSchema = z.object({
+    items: z.array(cartItemSchema),
+    itemsPrice: currency,
+    totalPrice: currency,
+    shippingPrice: currency,
+    taxPrice: currency,
+    sessionCartId: z.string().min(1, 'Session cart id is required'),
+    userId: z.string().optional().nullable(),
+});
