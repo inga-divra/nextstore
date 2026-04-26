@@ -12,24 +12,26 @@ export const metadata: Metadata = {
 };
 
 const ShippingAddressPage = async () => {
-  const cart = await getMyCart();
-
-  if (!cart || cart.items.length === 0) redirect('/cart');
-
   const session = await auth();
 
   const userId = session?.user?.id;
 
   if (!userId) {
-    throw new Error('User ID not found');
+    redirect('/sign-in');
   }
+
+  const cart = await getMyCart();
+
+  if (!cart || cart.items.length === 0) redirect('/cart');
 
   const user = await getUserById(userId);
 
   return (
     <>
       <CheckoutSteps current={1} />
-      <ShippingAddressForm address={user.address as ShippingAddress} />
+      <ShippingAddressForm
+        address={(user.address as ShippingAddress) || undefined}
+      />
     </>
   );
 };
