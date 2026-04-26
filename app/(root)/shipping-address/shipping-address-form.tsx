@@ -20,6 +20,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Loader } from 'lucide-react';
 import { shippingAddressSchema } from '@/lib/validators';
+import { updateUserAddress } from '@/lib/actions/user.actions';
 
 const ShippingAddressForm = ({
   address,
@@ -39,7 +40,18 @@ const ShippingAddressForm = ({
   const onSubmit: SubmitHandler<z.infer<typeof shippingAddressSchema>> = async (
     values,
   ) => {
-    console.log(values);
+    startTransition(async () => {
+      const res = await updateUserAddress(values);
+
+      if (!res.success) {
+        toast({
+          variant: 'destructive',
+          description: res.message,
+        });
+        return;
+      }
+      router.push('/payment-method');
+    });
   };
 
   return (
