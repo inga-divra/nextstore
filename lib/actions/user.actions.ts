@@ -1,14 +1,16 @@
 'use server'
 
-import { shippingAddressSchema, signInFormSchema, signUpFormSchema } from "../validators"
+import { shippingAddressSchema, signInFormSchema, signUpFormSchema, paymentMethodSchema } from "../validators"
 import { auth, signIn, signOut } from "@/auth"
 import { isRedirectError } from "next/dist/client/components/redirect-error"
 import { hashSync } from 'bcrypt-ts-edge';
 import { prisma } from '@/db/prisma';
 import { formatError } from '../utils';
 import { ShippingAddress } from "@/types";
-//Sign in user with credentials 
+import z from "zod";
+import { _success } from "zod/v4/core";
 
+//Sign in user with credentials
 export const signInWithCredentials = async (prevState: unknown, formData: FormData) => {
     try {
         const user = signInFormSchema.parse({
@@ -27,7 +29,6 @@ export const signInWithCredentials = async (prevState: unknown, formData: FormDa
 }
 
 //Sign user out
-
 export const signOutUser = async () => {
     await signOut()
 }
@@ -111,5 +112,31 @@ export const updateUserAddress = async (data: ShippingAddress) => {
         };
     } catch (error) {
         return { success: false, message: formatError(error) };
+    }
+}
+
+//Update user´s payment method
+export const updateUserPaymentMethod = async (data: z.infer<typeof paymentMethodSchema>) => {
+    try {
+        const session = await auth()
+        const currentUser = await prisma.user.findFirst({
+            where: { id: session?.user?.id }
+        })
+
+        if (!currentUser) throw new Error('User not found')
+
+        const paymentMethod = paymentMethodSchema.parse(data)
+
+        await prisma.user.update({
+            where: { id: currentUser.id },
+            data: { paymentMethod: paymentMethod.type }
+        })
+
+        return {
+            success: true,
+            message: 'User updated successfully'
+        }
+    } catch (error) {
+        return { success: false, message: formatError(error) }
     }
 }
