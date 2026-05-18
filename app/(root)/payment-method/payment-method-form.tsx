@@ -19,6 +19,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Loader } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { updateUserPaymentMethod } from '@/lib/actions/user.actions';
 
 const PaymentMethodForm = ({
   preferredPaymentMethod,
@@ -36,8 +37,22 @@ const PaymentMethodForm = ({
   });
 
   const [isPending, startTransition] = useTransition();
-  const onSubmit = () => {
-    return;
+
+  const onSubmit = async (values: z.infer<typeof paymentMethodSchema>) => {
+    startTransition(async () => {
+      const res = await updateUserPaymentMethod(values);
+
+      if (!res.success) {
+        toast({
+          variant: 'destructive',
+          description: res.message,
+        });
+
+        return;
+      }
+
+      router.push('/place-order');
+    });
   };
 
   return (
