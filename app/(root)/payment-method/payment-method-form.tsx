@@ -1,6 +1,5 @@
 'use client';
 
-import CheckoutSteps from '@/components/shared/checkout-steps';
 import { useToast } from '@/hooks/use-toast';
 import { DEFAULT_PAYMENT_METHOD } from '@/lib/constants';
 import { paymentMethodSchema } from '@/lib/validators';
@@ -28,7 +27,7 @@ const PaymentMethodForm = ({
   const [isPending, startTransition] = useTransition();
   return (
     <>
-      <CheckoutSteps current={2} />
+      <>Form</>
     </>
   );
 };
