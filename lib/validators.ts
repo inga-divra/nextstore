@@ -100,3 +100,13 @@ export const insertOrderSchema = z.object({
     }),
     shippingAddress: shippingAddressSchema,
 });
+
+// Insert Order Item
+export const insertOrderItemSchema = z.object({
+    productId: z.string(),
+    slug: z.string(),
+    image: z.string(),
+    name: z.string(),
+    price: currency,
+    qty: z.number(),
+});
