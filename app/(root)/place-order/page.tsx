@@ -19,7 +19,7 @@ import { getUserById } from '@/lib/actions/user.actions';
 import { formatCurrency } from '@/lib/utils';
 import { ShippingAddress } from '@/types';
 import { Metadata } from 'next';
-
+import PlaceOrderForm from './place-order-form';
 export const metadata: Metadata = {
   title: 'Place Order',
 };
@@ -137,7 +137,7 @@ const PlaceOrderPage = async () => {
                 <div>Total</div>
                 <div>{formatCurrency(cart.totalPrice)}</div>
               </div>
-              {/* Form Here */}
+              <PlaceOrderForm />
             </CardContent>
           </Card>
         </div>
