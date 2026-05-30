@@ -67,3 +67,8 @@ export const formatCurrency = (amount: number | string | null) => {
     return 'NaN';
   }
 }
+
+// Shorten ID
+export const formatId = (id: string) => {
+  return `..${id.substring(id.length - 6)}`;
+}
