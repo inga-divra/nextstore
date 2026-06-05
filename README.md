@@ -4,12 +4,6 @@
 
 👉 https://nextstore-chi.vercel.app/
 
-**Test account:**  
-Email: admin@example.com  
-Password: 123456
-
----
-
 ## 📌 Project Overview
 
 **Prostore** is a full-stack e-commerce application built to gain hands-on experience with modern web development using **Next.js, React, and TypeScript**.
