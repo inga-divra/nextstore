@@ -35,7 +35,21 @@ export const paypal = {
         });
 
         return handleResponse(response);
-    }
+    },
+
+    capturePayment: async function capturePayment(orderId: string) {
+        const accessToken = await generateAccessToken();
+        const url = `${base}/v2/checkout/orders/${orderId}/capture`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return handleResponse(response);
+    },
 };
 
 // Generate an access token for the PayPal API
