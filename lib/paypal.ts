@@ -1,6 +1,42 @@
 const base = process.env.PAYPAL_API_URL || 'https://api-m.sandbox.paypal.com';
 
-export const payplal = {}
+const handleResponse = async (response: Response) => {
+    if (response.status === 200 || response.status === 201) {
+        return response.json();
+    }
+
+    const errorMessage = await response.text();
+    throw new Error(errorMessage);
+}
+
+
+export const paypal = {
+    createOrder: async function createOrder(price: number) {
+        const accessToken = await generateAccessToken();
+        const url = `${base}/v2/checkout/orders`;
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify({
+                intent: 'CAPTURE',
+                purchase_units: [
+                    {
+                        amount: {
+                            currency_code: 'EUR',
+                            value: price,
+                        },
+                    },
+                ],
+            }),
+        });
+
+        return handleResponse(response);
+    }
+};
 
 // Generate an access token for the PayPal API
 const generateAccessToken = async () => {
@@ -21,14 +57,7 @@ const generateAccessToken = async () => {
     const jsonData = await handleResponse(response);
     return jsonData.access_token;
 
-    async function handleResponse(response: Response) {
-        if (response.status === 200 || response.status === 201) {
-            return response.json();
-        }
 
-        const errorMessage = await response.text();
-        throw new Error(errorMessage);
-    }
 }
 
 export { generateAccessToken }
