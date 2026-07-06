@@ -1,5 +1,11 @@
 import { prisma } from '@/db/prisma';
+import { Prisma } from '@prisma/client';
 
+
+type SalesDataType = {
+    month: string,
+    totalSales: number
+}[];
 // Get sales data and order summary
 export async function getOrderSummary() {
     // Get counts for each resource
