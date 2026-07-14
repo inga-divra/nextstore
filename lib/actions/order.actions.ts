@@ -1,5 +1,6 @@
 import { prisma } from '@/db/prisma';
 import { Prisma } from '@prisma/client';
+import { PAGE_SIZE } from '../constants';
 
 
 type SalesDataType = {
@@ -44,5 +45,28 @@ export async function getOrderSummary() {
         totalSales,
         latestOrders,
         salesData,
+    };
+}
+
+// Get All Orders (Admin)
+export const getAllOrders = async ({
+    limit = PAGE_SIZE,
+    page,
+}: {
+    limit?: number;
+    page: number;
+}) => {
+    const data = await prisma.order.findMany({
+        orderBy: { createdAt: 'desc' },
+        take: limit,
+        skip: (page - 1) * limit,
+        include: { user: { select: { name: true } } },
+    });
+
+    const dataCount = await prisma.order.count();
+
+    return {
+        data,
+        totalPages: Math.ceil(dataCount / limit),
     };
 }
